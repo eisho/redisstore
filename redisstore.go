@@ -6,12 +6,13 @@ import (
 	"encoding/base32"
 	"encoding/gob"
 	"errors"
-	"github.com/go-redis/redis"
-	"github.com/gorilla/sessions"
 	"io"
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/go-redis/redis/v7"
+	"github.com/gorilla/sessions"
 )
 
 // RedisStore stores gorilla sessions in Redis
@@ -165,9 +166,10 @@ type SessionSerializer interface {
 	Deserialize(b []byte, s *sessions.Session) error
 }
 
-// Gob serializer
+// GobSerializer -
 type GobSerializer struct{}
 
+// Serialize -
 func (gs GobSerializer) Serialize(s *sessions.Session) ([]byte, error) {
 	buf := new(bytes.Buffer)
 	enc := gob.NewEncoder(buf)
@@ -178,6 +180,7 @@ func (gs GobSerializer) Serialize(s *sessions.Session) ([]byte, error) {
 	return nil, err
 }
 
+// Deserialize -
 func (gs GobSerializer) Deserialize(d []byte, s *sessions.Session) error {
 	dec := gob.NewDecoder(bytes.NewBuffer(d))
 	return dec.Decode(&s.Values)

@@ -1,11 +1,12 @@
 package redisstore
 
 import (
-	"github.com/go-redis/redis"
-	"github.com/gorilla/sessions"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/go-redis/redis/v7"
+	"github.com/gorilla/sessions"
 )
 
 const (
