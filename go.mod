@@ -1,6 +1,6 @@
-module github.com/rbcervilla/redisstore
+module github.com/eisho/redisstore
 
-go 1.12
+go 1.14
 
 require (
 	github.com/go-redis/redis/v7 v7.3.0
